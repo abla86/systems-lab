@@ -1,0 +1,9 @@
+{
+  "name":"systems-lab",
+  "version":"1.0.0",
+  "private":true,
+  "scripts":{
+    "test":"node tests/security-check.mjs",
+    "build":"node tests/build-check.mjs"
+  }
+}
