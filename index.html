@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self';script-src 'self';style-src 'self' 'unsafe-inline';connect-src 'self';img-src 'self' data:">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self';script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval';worker-src blob:;style-src 'self' 'unsafe-inline';connect-src 'self';img-src 'self' data:">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
   <title>SYSTEMS LAB // AB Engineering</title>
@@ -45,19 +45,19 @@
 <script src="js/engines/worker-pool.js"></script>
 <script>
 labRuntime.registerEngine("wasm",{
-  title:"01 · Runtime Benchmark",
-  tag:"JS Baseline",
-  shortDesc:"Reproduserbar JavaScript-baseline for runtime-eksperimenter.",
-  concept:"Måler en ren JS-beregningssløyfe. Et ekte .wasm-modul er ikke kjørt i denne versjonen.",
+  title:"01 · WASM Benchmark",
+  tag:"Native WebAssembly",
+  shortDesc:"Faktisk WebAssembly-instansiering og målt sammenligning mot JS JIT.",
+  concept:"Kompilerer og kjører et in-memory WebAssembly-modul via WebAssembly.instantiate.",
   complexity:"O(N)"
 },WasmBenchmarkEngine);
 
 labRuntime.registerEngine("workers",{
-  title:"02 · Worker Pool",
-  tag:"Concurrency Model",
-  shortDesc:"Interaktiv oppgavepool som viser bakgrunnsarbeidsflyt.",
-  concept:"Pedagogisk task-pool-modell. Den nåværende implementasjonen simulerer tasks og er ikke en ekte Web Worker-pool.",
-  complexity:"O(T)"
+  title:"02 · Worker Thread Pool",
+  tag:"Native Web Workers",
+  shortDesc:"Faktisk parallelisering via browserens Worker API.",
+  concept:"Oppretter dedikerte Web Workers og fordeler tunge beregninger utenfor hovedtråden.",
+  complexity:"O(N / W)"
 },WorkerPoolEngine);
 
 labRuntime.mountEngine("wasm");
